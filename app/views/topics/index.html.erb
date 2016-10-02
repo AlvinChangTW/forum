@@ -1,0 +1,24 @@
+
+  <div class="row">
+    <%= link_to "新增文章", new_topic_path%>
+
+  </div>
+
+  <div class="row">
+
+        <div class="col-sm-offset-2 col-sm-8">
+          <table class="table">
+            <% @topics.each do |t| %>
+              <tr>
+                <td>文章標題：<%=t.name%></td>
+                <td><%=link_to "顯示內容", topic_path(t)%></td>
+                <td><%=link_to "編輯內容", edit_topic_path(t)%></td>
+                <td><%=link_to "刪除文章", topic_path(t),:method =>:delete%></td>
+              </tr>
+
+            <% end %>
+          </table>
+        </div>
+  </div>
+  <%= paginate @topics %>
+
