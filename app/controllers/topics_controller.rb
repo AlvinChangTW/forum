@@ -8,8 +8,13 @@ class TopicsController < ApplicationController
   end
   def create
     @topic = Topic.new(topic_params)
-    @topic.save
-    redirect_to topics_path
+    if @topic.save
+      flash[:notice]="新增成功"
+      redirect_to topics_path
+    else
+      flash[:alert]="新增失敗"
+      render :action => :new
+    end
   end
   def show
     @topic = Topic.find(params[:id])
@@ -19,8 +24,13 @@ class TopicsController < ApplicationController
   end
   def update
     @topic = Topic.find(params[:id])
-    @topic.update(topic_params)
-    redirect_to topics_path
+    if @topic.update(topic_params)
+       flash[:notice] = "更新成功"
+       redirect_to topics_path
+    else
+       flash[:alert]="更新失敗"
+       render :action => :edit
+    end
   end
   def destroy
     @topic = Topic.find(params[:id])
