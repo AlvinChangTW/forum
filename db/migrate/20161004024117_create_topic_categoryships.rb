@@ -6,6 +6,7 @@ class CreateTopicCategoryships < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
-    add_index :topic_id, :category_id
+    add_index :topic_categoryships, :topic_id
+    add_index :topic_categoryships, :category_id
   end
 end
