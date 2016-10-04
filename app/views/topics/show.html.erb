@@ -1,3 +1,21 @@
-文章主題：<%= @topic.name%><br>
-文章內容：<%= @topic.content%><br>
-<%= link_to "返回主頁", topics_path%>
+<h4>文章主題：<%= @topic.name%></h4>
+<h4>文章內容：<%= @topic.content%></h4>
+<table class="table">
+
+  <tr>留言內容</tr>
+  <%@comments=@topic.comments.all%>
+  <%@comments.each do |c|%>
+    <tr><td><%=c.content%></td></tr>
+  <%end%>
+</table>
+
+  <% @comment = @topic.comments.build %>
+  <%=form_for @comment, :url => topic_comments_path(@topic), :method => :post do |f| %>
+    <%=f.label :content,"留言"%>
+    <%=f.text_area :content, :class =>"form-control"%>
+    <%=f.submit "新增留言", :class =>"btn btn-primary"%>
+
+  <% end %>
+
+
+<%= link_to "返回主頁", topics_path, :class =>"btn btn-info"%>
