@@ -1,7 +1,6 @@
 class TopicsController < ApplicationController
  def index
-    @topics = Topic.all
-    @topics = Topic.page(params[:page]).per(5)
+    @topics = Topic.includes(:categories).page(params[:page]).per(5)
   end
   def new
     @topic = Topic.new
@@ -18,6 +17,11 @@ class TopicsController < ApplicationController
   end
   def show
     @topic = Topic.find(params[:id])
+    @comments = @topic.comments
+    if params[:order]
+      @comments = @comments.order("created_at DESC")
+    end
+
   end
   def edit
     @topic = Topic.find(params[:id])
@@ -40,7 +44,7 @@ class TopicsController < ApplicationController
 
   private
   def topic_params
-    params.require(:topic).permit(:name, :content)
+    params.require(:topic).permit(:name, :content, :category_ids =>[])
   end
 end
 

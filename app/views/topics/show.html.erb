@@ -1,12 +1,23 @@
 <h4>文章主題：<%= @topic.name%></h4>
+<h4>類別：<% @topic.categories.each do |c|%>
+      <%=c.name%>
+    <%end%>
+</h4>
+<%= link_to "時間排序", topic_path(@topic,:order => "createdxxx_at"), :class =>"btn btn-info"%>
 <h4>文章內容：<%= @topic.content%></h4>
 <table class="table">
 
-  <tr>留言內容</tr>
-  <%@comments=@topic.comments.all%>
+  <h4>留言內容</h4>
   <%@comments.each do |c|%>
-    <tr><td><%=c.content%></td></tr>
+    <tr>
+      <td><%=c.content%></td>
+      <td><%=c.created_at%></td>
+    </tr>
   <%end%>
+
+
+
+
 </table>
 
   <% @comment = @topic.comments.build %>

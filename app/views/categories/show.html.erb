@@ -1,19 +1,5 @@
-
-  <div class="row">
-    <%= link_to "新增文章", new_topic_path, :class => "btn btn-info"%>
-  </div>
-  <span class="btn btn-info">分類選取：</span>
-  <div class="row btn-group" role="group" aria-label="Basic example">
-    <% Category.all.each do |c|%>
-      <button type="button" class="btn btn-secondary">
-        <%= link_to c.name, category_path(c)%>
-      </button>
-    <% end %>
-  </div>
-
-
-  <div class="row">
-
+<div class="row">
+      <h2>類別：<%=@category.name%></h2>
         <div class="col-sm-offset-2 col-sm-8">
           <table class="table">
             <% @topics.each do |t| %>
@@ -23,8 +9,8 @@
                   <%t.categories.each do |c|%>
                     <%=c.name%>
                   <%end%>
+
                 </td>
-                <td><%=t.created_at%></td>
                 <td><%=link_to "顯示內容", topic_path(t)%></td>
                 <td><%=link_to "編輯內容", edit_topic_path(t)%></td>
                 <td><%=link_to "刪除文章", topic_path(t),:method =>:delete%></td>
@@ -34,5 +20,6 @@
           </table>
         </div>
   </div>
-  <%= paginate @topics %>
+<%= paginate @topics %>
 
+<%= link_to "返回主頁", topics_path, :class =>"btn btn-info"%>
