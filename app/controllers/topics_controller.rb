@@ -1,6 +1,13 @@
 class TopicsController < ApplicationController
  def index
-    @topics = Topic.includes(:categories).page(params[:page]).per(5)
+    if params[:order]
+      @topics=Topic.includes(:comments).order("comments.created_at DESC").page(params[:page]).per(10)
+    else
+      @topics = Topic.all.page(params[:page]).per(10)
+    end
+
+
+    # @topics = @topics.page(params[:page]).per(5)
   end
   def new
     @topic = Topic.new
@@ -18,9 +25,13 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @comments = @topic.comments
-    if params[:order]
+    @comments_number = @comments.count
+    if params[:order]=="created_at"
       @comments = @comments.order("created_at DESC")
+    # elsif params[:order]=="@comments_number"
+    #   @comments = @comments.order("@comments_number DESC")
     end
+
 
   end
   def edit

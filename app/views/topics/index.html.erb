@@ -1,4 +1,5 @@
 
+  <h2><%= link_to "TOPICS主頁", topics_path%></h2>
   <div class="row">
     <%= link_to "新增文章", new_topic_path, :class => "btn btn-info"%>
   </div>
@@ -6,8 +7,11 @@
   <div class="row btn-group" role="group" aria-label="Basic example">
     <% Category.all.each do |c|%>
       <button type="button" class="btn btn-secondary">
-        <%= link_to c.name, category_path(c)%>
+        <%=link_to c.name, category_path(c) %>
+
       </button>
+
+
     <% end %>
   </div>
 
@@ -16,21 +20,36 @@
 
         <div class="col-sm-offset-2 col-sm-8">
           <table class="table">
+            <tr>
+              <th>文章標題</th>
+              <th>文章類別</th>
+              <th>文章建立時間</th>
+              <th><%=link_to "文章最後回覆時間", topics_path(:order=>"comments_time")%></th>
+            </tr>
             <% @topics.each do |t| %>
               <tr>
-                <td>文章標題：<%=t.name%></td>
+                <td><%=t.name%></td>
                 <td>
                   <%t.categories.each do |c|%>
                     <%=c.name%>
                   <%end%>
                 </td>
                 <td><%=t.created_at%></td>
+
+                <td><%= if params[:order]
+                           t.comments.first.try(:created_at)
+                        else
+                           t.comments.last.try(:created_at)
+                        end %>
+                </td>
+
                 <td><%=link_to "顯示內容", topic_path(t)%></td>
                 <td><%=link_to "編輯內容", edit_topic_path(t)%></td>
                 <td><%=link_to "刪除文章", topic_path(t),:method =>:delete%></td>
               </tr>
 
             <% end %>
+
           </table>
         </div>
   </div>
