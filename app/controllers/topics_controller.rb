@@ -1,7 +1,10 @@
 class TopicsController < ApplicationController
  def index
-    if params[:order]
-      @topics=Topic.includes(:comments).order("comments.created_at DESC").page(params[:page]).per(10)
+    if params[:order]=="comments_time"
+      @topics=Topic.includes(:comments, :categories).order("comments.created_at DESC").page(params[:page]).per(10)
+      #上面代表topic依照comments的created_at欄位做排序
+    elsif params[:order]=="comments_count"
+     @topics=Topic.includes(:comments, :categories).order("comments_count DESC").page(params[:page]).per(10)
     else
       @topics = Topic.all.page(params[:page]).per(10)
     end

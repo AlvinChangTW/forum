@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   end
   resources :categories
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root :to => "topics#index"
 end

@@ -1,4 +1,4 @@
 class Comment < ApplicationRecord
-  belongs_to :topic
+  belongs_to :topic, :counter_cache => true
   validates_presence_of :content
 end

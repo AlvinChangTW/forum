@@ -25,6 +25,7 @@
               <th>文章類別</th>
               <th>文章建立時間</th>
               <th><%=link_to "文章最後回覆時間", topics_path(:order=>"comments_time")%></th>
+              <th><%=link_to "文章回覆數量", topics_path(:order=>"comments_count")%></th>
             </tr>
             <% @topics.each do |t| %>
               <tr>
@@ -36,11 +37,15 @@
                 </td>
                 <td><%=t.created_at%></td>
 
-                <td><%= if params[:order]
+                <td>
+                  <%= if params[:order]=="comments_time"
                            t.comments.first.try(:created_at)
-                        else
+                      else
                            t.comments.last.try(:created_at)
-                        end %>
+                      end %>
+                </td>
+                <td>
+                   <%= t.comments.size %>
                 </td>
 
                 <td><%=link_to "顯示內容", topic_path(t)%></td>
