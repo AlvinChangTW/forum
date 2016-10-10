@@ -55,7 +55,10 @@ class TopicsController < ApplicationController
     @topic.destroy
     redirect_to topics_path
   end
-
+  def about
+    @topics_number=Topic.all.count
+    @comments_number=Comment.all.count
+  end
   private
   def topic_params
     params.require(:topic).permit(:name, :content, :category_ids =>[])
