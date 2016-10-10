@@ -21,6 +21,6 @@ class TopicCommentsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
   end
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, :user_id)
   end
 end

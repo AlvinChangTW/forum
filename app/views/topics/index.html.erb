@@ -36,7 +36,11 @@
                       <%=c.name%>
                     <%end%>
                   </td>
-                  <td><%=t.user.try(:nickname)%></td>
+                  <td>
+                    <% if t.user_id%>
+                      <%=link_to t.user.try(:nickname), profile_user_path(t.user_id)%>
+                    <% end %>
+                  </td>
                   <td><%=t.created_at%></td>
 
                   <td>
@@ -50,9 +54,9 @@
                      <%= t.comments.size %>
                   </td>
 
-                  <td><%=link_to "顯示內容", topic_path(t)%></td>
-                  <td><%=link_to "編輯內容", edit_topic_path(t)%></td>
-                  <td><%=link_to "刪除文章", topic_path(t),:method =>:delete%></td>
+                  <td><%=link_to "顯示內容", topic_path(t), :class =>"btn btn-success"%></td>
+                  <td><%=link_to "編輯內容", edit_topic_path(t), :class =>"btn btn-info"%></td>
+                  <td><%=link_to "刪除文章", topic_path(t),:method =>:delete, :class =>"btn btn-danger"%></td>
                   <% end %>
                 </tr>
               </tbody>
