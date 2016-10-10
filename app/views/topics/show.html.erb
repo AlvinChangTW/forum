@@ -7,14 +7,20 @@
 <%#= link_to "留言數排序", topic_path(@topic,:order => "comments_number"), :class =>"btn btn-info"%>
 <h4>文章內容：<%= @topic.content%></h4>
 <table class="table">
-
-  <h4>留言內容</h4>
-  <%@comments.each do |c|%>
-    <tr>
-      <td><%=c.content%></td>
-      <td><%=c.created_at%></td>
-    </tr>
-  <%end%>
+ <thead>
+    <th>留言內容</th>
+   <th>留言者</th>
+   <th>留言時間</th>
+ </thead>
+  <tbody>
+    <%@comments.each do |c|%>
+      <tr>
+        <td><%=c.content%></td>
+        <td><%=c.user.try(:nickname)%></td>
+        <td><%=c.created_at%></td>
+      </tr>
+    <%end%>
+  </tbody>
 
 
 

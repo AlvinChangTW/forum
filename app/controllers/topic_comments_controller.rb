@@ -6,7 +6,7 @@ class TopicCommentsController < ApplicationController
   # end
   def create
     @comment = @topic.comments.build(comment_params)
-
+    @comment.user = current_user
     if @comment.save
        flash[:notice]="留言成功"
        redirect_to topic_path(@topic)

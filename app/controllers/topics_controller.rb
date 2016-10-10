@@ -17,6 +17,7 @@ class TopicsController < ApplicationController
   end
   def create
     @topic = Topic.new(topic_params)
+    @topic.user = current_user
     if @topic.save
       flash[:notice]="新增成功"
       redirect_to topics_path
@@ -42,9 +43,12 @@ class TopicsController < ApplicationController
   end
   def update
     @topic = Topic.find(params[:id])
-    if @topic.update(topic_params)
+    if @topic.update(topic_params) && @topic.user == current_user
        flash[:notice] = "更新成功"
        redirect_to topics_path
+    elsif @topic.user != current_user
+       flash[:alert]="沒有權限"
+       render :action => :edit
     else
        flash[:alert]="更新失敗"
        render :action => :edit
@@ -58,6 +62,7 @@ class TopicsController < ApplicationController
   def about
     @topics_number=Topic.all.count
     @comments_number=Comment.all.count
+    @users_number=User.all.count
   end
   private
   def topic_params
