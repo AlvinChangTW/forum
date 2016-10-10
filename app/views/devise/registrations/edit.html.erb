@@ -6,6 +6,10 @@
     <%= f.label :nickname %><br />
     <%= f.text_field :nickname, autofocus: true %>
   </div>
+   <div class="field">
+    <%= f.label "簡介" %><br />
+    <%= f.text_area :description, autofocus: true %>
+  </div>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
