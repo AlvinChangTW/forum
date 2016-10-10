@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def profile
-    @user = User.find(params[:id])
+    @user = User.includes(:topics,:comments).find(params[:id])
 
   end
 end
