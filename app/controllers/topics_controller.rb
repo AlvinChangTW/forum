@@ -5,6 +5,8 @@ class TopicsController < ApplicationController
       #上面代表topic依照comments的created_at欄位做排序
     elsif params[:order]=="comments_count"
      @topics=Topic.includes(:comments, :categories).order("comments_count DESC").page(params[:page]).per(10)
+     elsif params[:order]=="views_count"
+     @topics=Topic.includes(:comments, :categories).order("view DESC").page(params[:page]).per(10)
     else
       @topics = Topic.all.page(params[:page]).per(10)
     end
@@ -28,6 +30,8 @@ class TopicsController < ApplicationController
   end
   def show
     @topic = Topic.find(params[:id])
+    @topic.view += 1
+    @topic.save
     @comments = @topic.comments
     @comments_number = @comments.count
     if params[:order]=="created_at"
@@ -39,7 +43,12 @@ class TopicsController < ApplicationController
 
   end
   def edit
+
     @topic = Topic.find(params[:id])
+    if @topic.user !=current_user
+      flash[:alert]="沒有權限"
+      redirect_to topics_path
+    end
   end
   def update
     @topic = Topic.find(params[:id])
@@ -56,8 +65,12 @@ class TopicsController < ApplicationController
   end
   def destroy
     @topic = Topic.find(params[:id])
-    @topic.destroy
-    redirect_to topics_path
+    if @topic.user !=current_user
+      flash[:alert]="沒有權限"
+    else
+      @topic.destroy
+    end
+      redirect_to topics_path
   end
   def about
     @topics_number=Topic.all.count
@@ -66,8 +79,7 @@ class TopicsController < ApplicationController
   end
   private
   def topic_params
-    params.require(:topic).permit(:name, :content, :user_id,
-                                 :category_ids =>[])
+    params.require(:topic).permit(:name, :content, :user_id, :view, :category_ids =>[])
   end
 end
 

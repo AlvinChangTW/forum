@@ -13,7 +13,7 @@
    <th>留言時間</th>
  </thead>
   <tbody>
-    <%@comments.each do |c|%>
+    <% @comments.each do |c|%>
       <tr>
         <td><%=c.content%></td>
         <td><%=c.user.try(:nickname)%></td>

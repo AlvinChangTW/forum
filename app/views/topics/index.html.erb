@@ -24,6 +24,7 @@
                 <th>文章建立時間</th>
                 <th><%=link_to "文章最後回覆時間", topics_path(:order=>"comments_time")%></th>
                 <th><%=link_to "文章回覆數量", topics_path(:order=>"comments_count")%></th>
+                <th><%=link_to "文章瀏覽次數", topics_path(:order=>"views_count")%></th>
               </tr>
             </thead>
             <tbody>
@@ -53,6 +54,7 @@
                   <td>
                      <%= t.comments.size %>
                   </td>
+                  <td><%= t.view%></td>
 
                   <td><%=link_to "顯示內容", topic_path(t), :class =>"btn btn-success"%></td>
                   <td><%=link_to "編輯內容", edit_topic_path(t), :class =>"btn btn-info"%></td>
