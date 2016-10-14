@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :topics
   has_many :comments
+  has_many :likes
+  has_many :liked_topics, :through => :likes, :source => :topic
 end
+

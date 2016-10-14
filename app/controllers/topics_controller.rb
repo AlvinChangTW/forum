@@ -34,6 +34,21 @@ class TopicsController < ApplicationController
     @topic.save
     @comments = @topic.comments
     @comments_number = @comments.count
+    if params[:like]=="true"
+      @like = Like.new
+      @like.topic_id = @topic.id
+      @like.user_id = current_user.id
+      @like.save
+      render :show
+    elsif params[:like]=="cancel"
+      @like = Like.where(:topic_id => @topic).first
+      @like.destroy
+      render :show
+      # Like.liked_user = current_user.id
+      # @like = find_by_liked_user(current_user.id)
+      # @like.liked_topic = @topic.id
+    end
+
     if params[:order]=="created_at"
       @comments = @comments.order("created_at DESC")
     # elsif params[:order]=="@comments_number"
@@ -81,5 +96,8 @@ class TopicsController < ApplicationController
   def topic_params
     params.require(:topic).permit(:name, :content, :user_id, :view, :category_ids =>[])
   end
+  # def like_params
+  #   params.require(:like).permit(:user_id,:topic_id)
+  # end
 end
 

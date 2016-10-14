@@ -4,4 +4,6 @@ class Topic < ApplicationRecord
   has_many :topic_categoryships
   has_many :categories, :through => :topic_categoryships
   belongs_to :user
+  has_many :likes
+  has_many :liked_users, :through => :likes, :source => :user
 end

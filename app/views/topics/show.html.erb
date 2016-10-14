@@ -4,6 +4,18 @@
     <%end%>
 </h4>
 <%= link_to "時間排序", topic_path(@topic,:order => "created_at"), :class =>"btn btn-info"%>
+<%= if current_user.liked_topics.include?(@topic)
+  #include?可以判斷
+      link_to "取消讚", topic_path(@topic,:like=>"cancel"), :class =>"btn btn-info"
+    else
+      link_to "讚", topic_path(@topic,:like=>"true"), :class =>"btn btn-info"
+    end %>
+<%#= if Like.where(:topic_id => @topic.id, :user_id => current_user.id)
+  #這個判斷式不能用，因為where找出來就算沒有也是[],不會是nil或false
+      link_to "取消讚", topic_path(@topic,:like=>"cancel"), :class =>"btn btn-info"
+    else
+      link_to "讚", topic_path(@topic,:like=>"true"), :class =>"btn btn-info"
+    end %>
 <%#= link_to "留言數排序", topic_path(@topic,:order => "comments_number"), :class =>"btn btn-info"%>
 <h4>文章內容：<%= @topic.content%></h4>
 <table class="table">
