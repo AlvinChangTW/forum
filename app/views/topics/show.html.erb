@@ -5,14 +5,15 @@
 </h4>
 <%= link_to "時間排序", topic_path(@topic,:order => "created_at"), :class =>"btn btn-info"%>
 <span id="like">
-  <%= if @like
+  <% if @like
   # if current_user.likes.find_by_topic_id(@topic)
   # if current_user.liked_topics.include?(@topic)
     #上面兩的都可以
-        link_to "取消讚", topic_like_path(@topic,@like),:method =>:delete, :class =>"btn btn-info"
-      else
-        link_to "讚", topic_likes_path(@topic),:method =>:post, :class =>"btn btn-info"
-      end %>
+    %>
+        <%= link_to "取消讚", topic_like_path(@topic,@like), :remote=>true,:method =>:delete, :class =>"btn btn-info" %>
+  <% else %>
+        <%=link_to "讚", topic_likes_path(@topic),:remote=>true,:method =>:post,  :class =>"btn btn-info" %>
+  <% end %>
 
 </span>
 <%#= if Like.where(:topic_id => @topic.id, :user_id => current_user.id)
@@ -33,7 +34,7 @@
     <% @topic.comments.each do |c|%>
       <tr>
         <td><%=c.content%></td>
-        <td><%=c.user.try(:nickname)%></td>
+        <td><%=link_to c.user.try(:nickname), profile_user_path(c.user)%></td>
         <td><%=c.created_at%></td>
       </tr>
     <%end%>
