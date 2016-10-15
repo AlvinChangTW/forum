@@ -58,8 +58,10 @@
                   <td><%= t.view%></td>
                   <td><%= t.liked_users.count%></td>
                   <td><%=link_to "顯示內容", topic_path(t), :class =>"btn btn-success"%></td>
-                  <td><%=link_to "", edit_topic_path(t), :class =>"btn btn-info glyphicon glyphicon-pencil"%></td>
-                  <td><%=link_to "", topic_path(t),:method =>:delete, :class =>"btn btn-danger glyphicon glyphicon-trash"%></td>
+                  <%if current_user == t.user%>
+                    <td><%=link_to "", edit_topic_path(t), :class =>"btn btn-info glyphicon glyphicon-pencil"%></td>
+                    <td><%=link_to "", topic_path(t),:method =>:delete, :class =>"btn btn-danger glyphicon glyphicon-trash"%></td>
+                  <%end%>
                   <% end %>
                 </tr>
               </tbody>

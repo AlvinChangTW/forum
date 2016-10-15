@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
- def index
+  before_action :authenticate_user! ,:except=>[:index]
+  def index
     if params[:order]=="comments_time"
       @topics=Topic.includes(:comments, :categories).order("comments.created_at DESC").page(params[:page]).per(10)
       #上面代表topic依照comments的created_at欄位做排序
@@ -56,7 +57,6 @@ class TopicsController < ApplicationController
 
   end
   def edit
-
     @topic = Topic.find(params[:id])
     if @topic.user !=current_user
       flash[:alert]="沒有權限"
@@ -65,7 +65,8 @@ class TopicsController < ApplicationController
   end
   def update
     @topic = Topic.find(params[:id])
-    if @topic.update(topic_params) && @topic.user == current_user
+    if @topic.user == current_user
+       @topic.update(topic_params)
        flash[:notice] = "更新成功"
        redirect_to topics_path
     elsif @topic.user != current_user
