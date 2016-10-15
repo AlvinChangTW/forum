@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :topics do
     resources :comments, :controller => "topic_comments"
+    resources :likes, :only =>[:create, :destroy]
     collection do
       get :about
     end

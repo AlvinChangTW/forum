@@ -4,12 +4,17 @@
     <%end%>
 </h4>
 <%= link_to "時間排序", topic_path(@topic,:order => "created_at"), :class =>"btn btn-info"%>
-<%= if current_user.liked_topics.include?(@topic)
-  #include?可以判斷
-      link_to "取消讚", topic_path(@topic,:like=>"cancel"), :class =>"btn btn-info"
-    else
-      link_to "讚", topic_path(@topic,:like=>"true"), :class =>"btn btn-info"
-    end %>
+<span id="like">
+  <%= if @like
+  # if current_user.likes.find_by_topic_id(@topic)
+  # if current_user.liked_topics.include?(@topic)
+    #上面兩的都可以
+        link_to "取消讚", topic_like_path(@topic,@like),:method =>:delete, :class =>"btn btn-info"
+      else
+        link_to "讚", topic_likes_path(@topic),:method =>:post, :class =>"btn btn-info"
+      end %>
+
+</span>
 <%#= if Like.where(:topic_id => @topic.id, :user_id => current_user.id)
   #這個判斷式不能用，因為where找出來就算沒有也是[],不會是nil或false
       link_to "取消讚", topic_path(@topic,:like=>"cancel"), :class =>"btn btn-info"
@@ -25,7 +30,7 @@
    <th>留言時間</th>
  </thead>
   <tbody>
-    <% @comments.each do |c|%>
+    <% @topic.comments.each do |c|%>
       <tr>
         <td><%=c.content%></td>
         <td><%=c.user.try(:nickname)%></td>
