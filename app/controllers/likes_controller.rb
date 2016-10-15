@@ -26,8 +26,5 @@ class LikesController < ApplicationController
     end
     #render "topics/show"
   end
-  private
-  # def like_params
-  #   params.require(:like).permit(:topic_id, :user_id)
-  # end
+
 end

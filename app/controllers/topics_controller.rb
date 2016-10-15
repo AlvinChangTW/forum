@@ -4,9 +4,9 @@ class TopicsController < ApplicationController
       @topics=Topic.includes(:comments, :categories).order("comments.created_at DESC").page(params[:page]).per(10)
       #上面代表topic依照comments的created_at欄位做排序
     elsif params[:order]=="comments_count"
-     @topics=Topic.includes(:comments, :categories).order("comments_count DESC").page(params[:page]).per(10)
-     elsif params[:order]=="views_count"
-     @topics=Topic.includes(:comments, :categories).order("view DESC").page(params[:page]).per(10)
+      @topics=Topic.includes(:comments, :categories).order("comments_count DESC").page(params[:page]).per(10)
+    elsif params[:order]=="views_count"
+      @topics=Topic.includes(:comments, :categories).order("view DESC").page(params[:page]).per(10)
     else
       @topics = Topic.all.page(params[:page]).per(10)
     end
