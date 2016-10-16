@@ -10,6 +10,12 @@
   <li class="list-group-item">文章主題：<%= link_to t.name,topic_path(t)%></li>
 <% end %>
 </ul>
+<h4 class="text-info">使用者按讚文章</h4>
+<ul class="list-group">
+<% @likes.each do |l|%>
+  <li class="list-group-item">文章主題：<%= link_to l.name,topic_path(l)%></li>
+<% end %>
+</ul>
 <h4 class="text-info">使用者留言</h4>
 <table class="table">
   <thead>

@@ -41,13 +41,7 @@
       </tr>
     <%end%>
   </tbody>
-
-
-
-
 </table>
-
-
   <%=form_for @comment, :url => topic_comment_path(@topic,@comment), :method => :patch do |f| %>
     <%=f.label :content,"修改留言"%>
     <%=f.text_area :content, :class =>"form-control"%>
