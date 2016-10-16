@@ -9,7 +9,8 @@ class TopicsController < ApplicationController
     elsif params[:order]=="views_count"
       @topics=Topic.includes(:comments, :categories).order("view DESC").page(params[:page]).per(10)
     else
-      @topics = Topic.all.page(params[:page]).per(10)
+      @topics = Topic.includes(:comments).page(params[:page]).per(10)
+
     end
 
 
