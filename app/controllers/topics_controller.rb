@@ -10,11 +10,7 @@ class TopicsController < ApplicationController
       @topics=Topic.includes(:comments, :categories).order("view DESC").page(params[:page]).per(10)
     else
       @topics = Topic.includes(:comments).page(params[:page]).per(10)
-
     end
-
-
-    # @topics = @topics.page(params[:page]).per(5)
   end
   def new
     @topic = Topic.new
