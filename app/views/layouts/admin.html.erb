@@ -33,9 +33,7 @@
             <%= link_to('註冊', new_registration_path(:user)) %> |
             <%= link_to('登入', new_session_path(:user)) %>
           <% end %>
-          <% if current_user && current_user.admin? %>
-          <%= link_to "管理者頁面", admin_topics_path%>
-          <% end %>
+          <%= link_to "一般使用者頁面", topics_path%>
     <%= yield %>
     </div>
   </body>

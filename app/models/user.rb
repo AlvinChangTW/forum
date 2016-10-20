@@ -7,5 +7,9 @@ class User < ApplicationRecord
   has_many :comments
   has_many :likes
   has_many :liked_topics, :through => :likes, :source => :topic
+
+  def admin?
+    self.role=="admin"
+  end
 end
 
