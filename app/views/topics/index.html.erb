@@ -55,7 +55,7 @@
             <%=link_to User.find(u).try(:nickname), profile_user_path(u) %>
           <%end%>
         </td>
-        <td><%=t.created_at%></td>
+        <td><%=t.created_at.to_s(:db)%></td>
 
         <td>
           <%= if params[:order]=="comments_time"
