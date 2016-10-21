@@ -27,6 +27,9 @@
       <th><%=link_to "文章回覆數量", topics_path(:order=>"comments_count")%></th>
       <th><%=link_to "文章瀏覽次數", topics_path(:order=>"views_count")%></th>
       <th>文章按讚數</th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -70,6 +73,9 @@
         <%if current_user == t.user%>
           <td><%=link_to "", edit_topic_path(t), :class =>"btn btn-info glyphicon glyphicon-pencil"%></td>
           <td><%=link_to "", topic_path(t),:method =>:delete, :class =>"btn btn-danger glyphicon glyphicon-trash"%></td>
+        <% else %>
+          <td></td>
+          <td></td>
         <%end%>
 
       </tr>
