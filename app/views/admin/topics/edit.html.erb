@@ -1,0 +1,13 @@
+   <%= form_for @topic, :url => admin_topic_path(@topic), :method => :patch do |f| %>
+          <div class="form-group">
+            <%= f.label :name, "文章主題" %>
+            <%= f.text_field :name ,:class => "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= f.label :content, "文章內容" %>
+            <%= f.text_area :content ,:class => "form-control"%>
+          </div>
+            <%= f.submit "更新內容", :class => "btn btn-primary"%>
+
+     <% end %>
+     <%= link_to "返回主頁", topics_path, :class =>"btn btn-info"%>
