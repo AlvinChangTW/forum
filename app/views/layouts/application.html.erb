@@ -31,7 +31,9 @@
             <%= link_to('編輯使用者資訊', edit_registration_path(:user)) %>
           <% else %>
             <%= link_to('註冊', new_registration_path(:user)) %> |
-            <%= link_to('登入', new_session_path(:user)) %>
+            <%= link_to('登入', new_session_path(:user)) %> |
+            <%= link_to "登入 Facebook", user_facebook_omniauth_authorize_path %>
+
           <% end %>
           <% if current_user && current_user.admin? %>
           <%= link_to "管理者頁面", admin_topics_path%>
