@@ -3,6 +3,7 @@
             <%= f.label :name, "文章主題" %>
             <%= f.text_field :name ,:class => "form-control"%>
           </div>
+          上傳主題照片<%= f.file_field :picture%>
           <div class="form-group">
             <%= f.label :content, "文章內容" %>
             <%= f.text_area :content ,:class => "form-control"%>

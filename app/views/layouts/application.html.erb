@@ -36,7 +36,7 @@
 
           <% end %>
           <% if current_user && current_user.admin? %>
-          <%= link_to "管理者頁面", admin_topics_path%>
+          | <%= link_to "管理者頁面", admin_topics_path%>
           <% end %>
     <%= yield %>
     </div>

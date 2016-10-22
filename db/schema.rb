@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021034525) do
+ActiveRecord::Schema.define(version: 20161022124257) do
 
   create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
@@ -49,12 +49,16 @@ ActiveRecord::Schema.define(version: 20161021034525) do
 
   create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
     t.string   "name"
-    t.text     "content",        limit: 65535
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
-    t.integer  "comments_count",               default: 0
+    t.text     "content",              limit: 65535
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "comments_count",                     default: 0
     t.integer  "user_id"
-    t.integer  "view",                         default: 0
+    t.integer  "view",                               default: 0
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
     t.index ["user_id"], name: "index_topics_on_user_id", using: :btree
     t.index ["view"], name: "index_topics_on_view", using: :btree
   end

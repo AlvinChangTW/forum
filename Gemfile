@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'kaminari'
+gem "paperclip"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'devise'
 gem 'omniauth-facebook'

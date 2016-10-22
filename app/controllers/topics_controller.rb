@@ -90,7 +90,7 @@ class TopicsController < ApplicationController
   end
   private
   def topic_params
-    params.require(:topic).permit(:name, :content, :user_id, :view, :category_ids =>[])
+    params.require(:topic).permit(:name, :content, :user_id, :view, :picture, :category_ids =>[])
   end
   # def like_params
   #   params.require(:like).permit(:user_id,:topic_id)
