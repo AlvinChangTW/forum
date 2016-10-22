@@ -62,6 +62,9 @@ class TopicsController < ApplicationController
   end
   def update
     @topic = Topic.find(params[:id])
+    if params[:delete_pic]=="1"
+      @topic.picture=nil
+    end
     if @topic.user == current_user
        @topic.update(topic_params)
        flash[:notice] = "更新成功"

@@ -3,7 +3,12 @@
             <%= f.label :name, "文章主題" %>
             <%= f.text_field :name ,:class => "form-control"%>
           </div>
-          上傳主題照片<%= f.file_field :picture%>
+          <div class="form-group">
+            上傳主題照片<%= f.file_field :picture%>
+            <% if @topic.picture.exists? %>
+              <%= check_box_tag :delete_pic,"1"%>刪除照片
+            <% end %>
+          </div>
           <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name)%>
           <div class="form-group">
             <%= f.label :content, "文章內容" %>

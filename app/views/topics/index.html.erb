@@ -18,6 +18,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>文章標題</th>
       <th>文章類別</th>
       <th>文章作者</th>
@@ -36,6 +37,7 @@
 
   <% @topics.each do |t| %>
       <tr>
+        <td class="topic-title-img"><%= image_tag t.picture.url(:thumb)%></td>
         <td><%=link_to t.name, topic_path(t)%></td>
         <td>
           <%t.categories.each do |c|%>
