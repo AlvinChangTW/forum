@@ -10,6 +10,7 @@ class TopicCommentsController < ApplicationController
     #@comment.topic_id = @topic.id
     @comment = @topic.comments.build(comment_params)
     @comment.user = current_user
+    @subscribe = current_user.subscribes.find_by_topic_id(@topic)
     if @comment.save
       flash[:notice]="留言成功"
       #@topic.view-=1

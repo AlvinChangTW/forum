@@ -33,6 +33,7 @@ class TopicsController < ApplicationController
     @comments = @topic.comments
     @comments_number = @comments.count
     @like = current_user.likes.find_by_topic_id(@topic)
+    @subscribe = current_user.subscribes.find_by_topic_id(@topic)
     # if params[:like]=="true"
 
 

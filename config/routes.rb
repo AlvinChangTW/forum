@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :topics do
     resources :comments, :controller => "topic_comments"
     resources :likes, :only =>[:create, :destroy]
+    resources :subscribes, :only =>[:create, :destroy]
     collection do
       get :about
     end
