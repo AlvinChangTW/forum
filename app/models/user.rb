@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :liked_topics, :through => :likes, :source => :topic
   has_many :subscribes
   has_many :subscribed_topics, :through => :subscribes, :source => :topic
+
   def admin?
     self.role=="admin"
   end
