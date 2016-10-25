@@ -13,6 +13,11 @@ class User < ApplicationRecord
   def admin?
     self.role=="admin"
   end
+
+  def to_param
+    "#{nickname}"
+  end
+
   def self.from_omniauth(auth)
      # Case 1: Find existing user by facebook uid
      user = User.find_by_fb_uid( auth.uid )
