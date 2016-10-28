@@ -1,5 +1,7 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user! ,:except=>[:index]
+  before_action :authenticate_user! ,:except=>[:index, :livetest]
+  def livetest
+  end
   def index
     if params[:order]=="comments_time"
       @topics=Topic.includes(:comments, :categories).order("comments.created_at DESC").page(params[:page]).per(10)
